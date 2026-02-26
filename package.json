@@ -4,9 +4,9 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "bun run --watch src/index.ts",
-    "build": "bun build src/index.ts --compile --outfile dist/admin-server",
-    "start": "./dist/admin-server"
+    "dev": "bun run --watch index.ts",
+    "build": "bun build index.ts --compile --outfile dist/admin-server",
+    "start": "bun run index.ts"
   },
   "devDependencies": {
     "@types/bun": "latest"
