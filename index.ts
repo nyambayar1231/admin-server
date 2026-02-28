@@ -19,6 +19,14 @@ app.get('/health', (c) =>
   }),
 );
 
+app.get('/test', (c) =>
+  c.json({
+    status: 'test',
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+  }),
+);
+
 // API Routes
 app.route('/api/users', userRoutes);
 
