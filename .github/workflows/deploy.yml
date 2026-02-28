@@ -30,7 +30,6 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           source: 'dist/admin-server'
           target: '/home/ec2-user/projects/admin-server/'
-          rm: true
 
       - name: Deploy with PM2
         uses: appleboy/ssh-action@v1.0.3
