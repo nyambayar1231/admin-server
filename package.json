@@ -9,12 +9,16 @@
     "start": "bun run index.ts"
   },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bcryptjs": "^3.0.0",
+    "@types/bun": "latest",
+    "@types/node": "^25.3.2"
   },
   "peerDependencies": {
     "typescript": "^5"
   },
   "dependencies": {
-    "hono": "^4.12.3"
+    "bcryptjs": "^3.0.3",
+    "hono": "^4.12.3",
+    "mongoose": "8"
   }
 }
