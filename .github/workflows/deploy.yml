@@ -32,12 +32,32 @@ jobs:
           target: '/home/ec2-user/projects/admin-server/'
           rm: true
 
-      - name: Restart server
+      - name: Deploy with PM2
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            chmod +x /home/ec2-user/projects/admin-server/dist/admin-server
-            pm2 restart admin-server
+            cd /home/ec2-user/projects/admin-server
+            
+            # Make binary executable
+            chmod +x dist/admin-server
+            
+            # Check if ecosystem file exists on EC2
+            if [ ! -f ecosystem.config.js ]; then
+              echo "Error: ecosystem.config.js not found on EC2!"
+              echo "Please create it manually with your MongoDB credentials"
+              exit 1
+            fi
+            
+            # Reload PM2 with ecosystem file (graceful reload with new binary)
+            pm2 reload ecosystem.config.js --update-env
+            
+            # Save PM2 config to persist across reboots
+            pm2 save
+            
+            echo "✓ Deployment complete"
+            echo ""
+            echo "PM2 Status:"
+            pm2 status
