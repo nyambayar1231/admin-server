@@ -6,7 +6,7 @@ const app = new Hono();
 
 app.get('/', (c) =>
   c.json({
-    message: 'Admin Server API, CICD test',
+    message: 'Admin Server API',
     status: 'running',
   }),
 );
@@ -19,16 +19,8 @@ app.get('/health', (c) =>
   }),
 );
 
-app.get('/test', (c) =>
-  c.json({
-    status: 'test',
-    timestamp: new Date().toISOString(),
-    uptime: process.uptime(),
-  }),
-);
-
 // API Routes
-app.route('/api/users', userRoutes);
+app.route('/users', userRoutes);
 
 // 404 handler
 app.notFound((c) => c.json({ error: 'Route not found' }, 404));
