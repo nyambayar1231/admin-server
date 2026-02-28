@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "bun run --watch index.ts",
     "build": "bun build index.ts --compile --outfile dist/admin-server",
-    "start": "bun run index.ts"
+    "start": "bun run index.ts",
+    "seed": "bun run scripts/seed.ts"
   },
   "devDependencies": {
     "@types/bcryptjs": "^3.0.0",
