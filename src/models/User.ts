@@ -63,6 +63,15 @@ const userSchema = new Schema<IUserDocument, IUserModel>(
         return safeRet;
       },
     },
+    toObject: {
+      transform: (_doc, ret) => {
+        const safeRet = ret as Record<string, unknown>;
+        delete safeRet.password;
+        delete safeRet.refreshToken;
+        delete safeRet.__v;
+        return safeRet;
+      },
+    },
   },
 );
 
