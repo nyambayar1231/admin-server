@@ -6,9 +6,9 @@ import userRoutes from './src/routes/userRoutes.js';
 const app = new Hono();
 
 // Parse CORS origins from environment variable
-const corsOrigins = process.env.CORS_ORIGINS
-  ? process.env.CORS_ORIGINS.split(',').map((origin) => origin.trim())
-  : ['http://localhost:5173', 'http://localhost:5174'];
+const corsOrigins = process.env.CORS_ORIGINS?.split(',').map((origin) =>
+  origin.trim(),
+) as string[];
 
 // Apply CORS middleware
 app.use(
