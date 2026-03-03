@@ -1,9 +1,9 @@
-import { connectDB, disconnectDB } from "../src/config/database.js";
-import { User } from "../src/models/User.js";
+import { connectDB, disconnectDB } from '../src/config/database.js';
+import { User } from '../src/models/User.js';
 
 const SEED_USER = {
-  username: "nyamka1231",
-  password: "Pass@1234",
+  username: 'nyamka1231',
+  password: 'Pass@1234',
 };
 
 async function seedDatabase(): Promise<void> {
@@ -16,7 +16,7 @@ async function seedDatabase(): Promise<void> {
 
     if (existingUser) {
       console.log(`✓ User "${SEED_USER.username}" already exists`);
-      console.log("  Skipping seed...");
+      console.log('  Skipping seed...');
       return;
     }
 
@@ -29,7 +29,7 @@ async function seedDatabase(): Promise<void> {
     console.log(`✓ User "${SEED_USER.username}" created successfully`);
     console.log(`  Created at: ${user.createdAt}`);
   } catch (error) {
-    console.error("✗ Seeding failed:", error);
+    console.error('✗ Seeding failed:', error);
     process.exit(1);
   } finally {
     await disconnectDB();

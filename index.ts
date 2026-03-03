@@ -1,8 +1,25 @@
 import { Hono } from 'hono';
+import { cors } from 'hono/cors';
 import { connectDB } from './src/config/database.js';
 import userRoutes from './src/routes/userRoutes.js';
 
 const app = new Hono();
+
+// Parse CORS origins from environment variable
+const corsOrigins = process.env.CORS_ORIGINS
+  ? process.env.CORS_ORIGINS.split(',').map((origin) => origin.trim())
+  : ['http://localhost:5173', 'http://localhost:5174'];
+
+// Apply CORS middleware
+app.use(
+  '*',
+  cors({
+    origin: corsOrigins,
+    credentials: true,
+    allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowHeaders: ['Content-Type', 'Authorization'],
+  }),
+);
 
 app.get('/', (c) =>
   c.json({
